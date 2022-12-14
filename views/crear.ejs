@@ -1,0 +1,66 @@
+<%- include("template/cabezera", {tituloWeb: "Crea tu confesion"}) %>
+
+<div class="ElT">
+  <h2>Confiesate</h2>
+
+  <form action="/Confesiones" method="post" class="Form1">
+    <p>Titulo</p>
+    <input
+      type="text"
+      placeholder="Enter your title"
+      maxlength="20"
+      class="T1Input"
+      name="Tema"
+    />
+    <p>Nombre</p>
+    <input
+      type="text"
+      placeholder="Enter your name/alias"
+      class="NameInput"
+      name="Alias"
+    />
+
+    <p>Contraseña</p>
+    <input
+      type="password"
+      placeholder="Enter your password"
+      class="PassInput"
+      name="Pass"
+    />
+
+    <p>Asunto</p>
+    <textarea
+      placeholder="Enter your subject"
+      class="ConfiInput"
+      maxlength="1000"
+      name="Confesion"
+    ></textarea>
+    <aside class="fle">
+      <!-- <div class="Eyes">
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          ></path>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+          ></path>
+        </svg>
+      </div> -->
+      <button class="BtCrea">Crear</button>
+    </aside>
+  </form>
+</div>
+
+<%- include("template/footer") %>

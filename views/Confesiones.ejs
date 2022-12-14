@@ -1,0 +1,166 @@
+<%- include("template/cabezera", {tituloWeb: "Pagina de inico"}) %>
+
+<div class="AllCards">
+  <h2 class="Allcah">Estas son las confesiones de todos</h2>
+
+  <% if (ArrayConfesiones.length > 0) { %> <% ArrayConfesiones.forEach( Confi =>
+  { %>
+
+  <article class="Cards">
+    <div class="Titulo">
+      <h2><%=Confi.Tema %></h2>
+      <hr class="Elhr" />
+      <p><%= Confi.Alias %></p>
+    </div>
+    <div class="Contenido">
+      <p><%= Confi.Confesion %></p>
+    </div>
+    <div class="Funciones">
+      <div class="Delete">
+        <button class="MuestraM button" id="<%= Confi.id %>">
+          <a>
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              ></path>
+            </svg>
+          </a>
+        </button>
+      </div>
+      <div class="Edit">
+        <button class="button">
+          <a href="/confesiones/<%= Confi.id %> ">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+              ></path>
+            </svg>
+          </a>
+        </button>
+      </div>
+    </div>
+    <!-- <div class="Fecha"><%= Confi.Fecha = id2 %></div> -->
+  </article>
+
+  <% }) %>
+
+  <article class="modal" id="contact">
+    <div class="modal-conten">
+      <a class="modal-close">
+        <svg
+          class="w-6 h-6 esvg"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+      </a>
+      <div class="elforn">
+        <h2 class="fornH">
+          Ingrese Su contraseña para realizar la edicion de su post
+        </h2>
+        <form action="" id="Va">
+          <input
+            type="text"
+            placeholder="PassWord"
+            class="pas"
+            name="password"
+          />
+          <button class="Vas">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </article>
+
+  <% } %>
+
+  <!-- <a href="/Confesiones/Modal"> Crear confesion</a>  -->
+</div>
+
+<%- include("template/footer") %>
+
+<script>
+  const MuestraM = document.querySelectorAll(".MuestraM");
+  const modal = document.querySelector(".modal");
+  const va = document.querySelector("#Va");
+
+  const CloseModal = document.querySelector(".modal-close");
+
+  let loTengo;
+
+  for (let index = 0; index < MuestraM.length; index++) {
+    const element = MuestraM[index];
+    element.addEventListener("click", () => {
+      modal.classList.add("Seve");
+      va.action = "/Confesiones/" + element.id;
+      loTengo = element.id;
+    });
+  }
+
+  // MuestraM.addEventListener('click', () => {
+  //   modal.classList.add('Seve')
+  //   console.log('X');
+  // })
+
+  CloseModal.addEventListener("click", () => {
+    modal.classList.remove("Seve");
+
+    console.log("Funciona");
+  });
+
+  // module.exports.vas
+
+  //Delete Card
+
+  const form = document.querySelector("#Va");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const password = e.target.password.value;
+
+    const data = new FormData(form);
+
+    // console.log(text);
+
+    const stringifeado = JSON.stringify({ password });
+
+    console.log(stringifeado);
+
+    // const ana = document.querySelector('.Delete')
+
+    // console.log(loTengo);
+
+    fetch(`http://localhost:4000/Confesiones/${loTengo}`, {
+      headers: { "content-type": "application/json" },
+      body: stringifeado,
+      method: "delete",
+    })
+      .then((res) => res.json())
+      .then((result) => console.log(result));
+  });
+</script>
