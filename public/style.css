@@ -23,6 +23,10 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.mt-4{
+  margin-top: 1.5rem;
+}
 /* 
 .Todos {
   display: flex;
@@ -40,7 +44,7 @@ header {
 }
 
 header nav {
-  width: 30%;
+  width: 45%;
   height: 100%;
   display: flex;
   justify-content: space-between;
